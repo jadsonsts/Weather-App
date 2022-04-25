@@ -28,7 +28,8 @@ struct Hourly: Codable {
     let temp: Double
     let hWeather: [HWeather]
 }
-
+//verificar se posso copiar a struct weather para nao repetir. (verificar se devo usar Class ao inves de struct)
+// let HWeather: Weather
 struct HWeather: Codable {
     let id: Int
     let main: String

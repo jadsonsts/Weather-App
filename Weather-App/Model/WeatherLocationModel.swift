@@ -8,7 +8,8 @@
 import Foundation
 
 struct WeatherLocationModel {
-    let name: String
+    let cityName: String
     let lat: Double
     let lon: Double
+    
 }

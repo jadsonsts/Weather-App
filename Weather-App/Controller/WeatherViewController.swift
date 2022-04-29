@@ -36,7 +36,6 @@ class WeatherViewController: UIViewController {
         locationManager.requestLocation()
         
         weatherLocationManager.delegate = self
-        weatherManager.delegate = self
         forecastCollectionView.delegate = self
         forecastCollectionView.dataSource = self
         
@@ -59,6 +58,18 @@ class WeatherViewController: UIViewController {
         date.timeStyle = .none
         date.string(from: today)
         dateLabel.text = date.string(from: today)
+    }
+    
+    func errorMessageShow(error: String) {
+        let alert = UIAlertController(title: "Ops", message: "Couldn't get your location: \(error)", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { [self] (action) in
+            //locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 
 }
@@ -86,30 +97,22 @@ extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = searchTextField.text {
+            cityLabel.text = city
             weatherLocationManager.fetchLocation(cityName: city)
         }
         
         if let lat = self.latitudeLongitude?.0, let lon = self.latitudeLongitude?.1 {
-            self.weatherManager.fetchWeather(latitude: lat, longitude: lon)
+            self.weatherManager.fetchWeather(latitude: lat, longitude: lon) { weather in
+                self.weatherForecast = weather
+            } onError: { errorMessage in
+                self.errorMessageShow(error: errorMessage)
+            }
+            
         }
 
     }
 }
 
-//MARK: - WeatherManagerDelegate
-extension WeatherViewController: WeatherManagerDelegate {
-    func didUpdateWeather(_ WeatherManager: WeatherManager, weather: WeatherModel) {
-        DispatchQueue.main.async {
-            self.temperatureLabel.text = weather.temperatureString
-            self.conditionImgView.image = UIImage(systemName: weather.conditionName)
-            self.conditionLabel.text = weather.description
-        }
-    }
-    
-    func didFailWithError(error: Error) {
-        debugPrint(error) //change
-    }
-}
 
 //MARK: - WeatherLocationManagerDelegate
 extension WeatherViewController: WeatherLocationManagerDelegate {
@@ -122,7 +125,7 @@ extension WeatherViewController: WeatherLocationManagerDelegate {
     }
     
     func didFailLocationWithError(error: Error) {
-        debugPrint(error) //change
+        errorMessageShow(error: "\(error)")
     }
     
     
@@ -136,7 +139,13 @@ extension WeatherViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
-            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+            weatherManager.fetchWeather(latitude: lat, longitude: lon) { weather in
+                self.weatherForecast = weather
+            } onError: { errorMessage in
+                self.errorMessageShow(error: errorMessage)
+                debugPrint(errorMessage)
+            }
+
         }
             
     }
@@ -180,11 +189,13 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? DetailsWeatherCollectionViewCell {
             if forecastSegmentControl.selectedSegmentIndex == 0 {
-                if let forecast = weatherForecast?.hourly[indexPath.row] {
-                    cell.tempLabel.text = String(forecast.temp)
-                    cell.timeLabel.text = String(forecast.dt)
+                if let hourForecast = weatherForecast?.hourly[indexPath.row] {
+                    cell.updateCellHour(hourly: hourForecast)
                 }
-
+            } else if forecastSegmentControl.selectedSegmentIndex == 1 {
+                if let dayForecast = weatherForecast?.daily[indexPath.row] {
+                    cell.updateCellDay(daily: dayForecast)
+                }
             }
 
             return cell

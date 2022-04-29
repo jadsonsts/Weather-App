@@ -9,8 +9,8 @@ import Foundation
 
 struct WeatherData: Codable {
     let current: Current
-    var hourly: [Hourly]
-    var daily: [Daily]
+    var hourly: Array<Hourly>
+    var daily: Array<Daily>
 }
 
 struct Current: Codable {
@@ -39,20 +39,3 @@ struct Daily: Codable {
 struct Temp: Codable {
     var day: Double
 }
-
-
-//verificar se posso copiar a struct weather para nao repetir. (verificar se devo usar Class ao inves de struct)
-// let HWeather: Weather
-
-//struct HWeather: Codable {
-//    let id: Int
-//    let main: String
-//    let description: String
-//}
-
-
-//struct DailyWeather: Codable {
-//    let id: Int
-//    let main: String
-//    let description: String
-//}

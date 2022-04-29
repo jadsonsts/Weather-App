@@ -53,8 +53,19 @@ struct WeatherManager {
             let id = decodeData.current.weather[0].id
             let temp = decodeData.current.temp
             let desc = "\(decodeData.current.weather[0].main) | \(decodeData.current.weather[0].description)"
-            let weather = WeatherModel(conditionId: id, temperature: temp, description: desc)
             
+            let hourDate = decodeData.hourly[0].dt
+            let hourWeatherID = decodeData.hourly[0].weather[0].id
+            let hourTemp = decodeData.hourly[0].temp
+                        
+            let dayDate = decodeData.daily[0].dt
+            let dayWeatherID = decodeData.daily[0].weather[0].id
+            let dayTemp = decodeData.daily[0].temp.day
+                        
+            let weather = WeatherModel(conditionId: id, temperature: temp, description: desc, hourDate: hourDate, hourWeatherID: hourWeatherID, hourTemp: hourTemp, dayDate: dayDate, dayWeatherID: dayWeatherID, daytemp: dayTemp)
+            
+            print(decodeData)
+//            print(weather)
             return weather
         } catch {
             delegate?.didFailWithError(error: error)

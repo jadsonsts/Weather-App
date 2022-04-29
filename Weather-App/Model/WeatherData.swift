@@ -9,46 +9,50 @@ import Foundation
 
 struct WeatherData: Codable {
     let current: Current
-    let hourly: [Hourly]
+    var hourly: [Hourly]
+    var daily: [Daily]
 }
 
 struct Current: Codable {
-    let temp: Double
-    let weather: [Weather]
+    var temp: Double
+    var weather: [Weather]
 }
 
 struct Weather: Codable {
-    let id: Int
-    let main: String
-    let description: String
+    var id: Int
+    var main: String
+    var description: String
 }
 
 struct Hourly: Codable {
-    let dt: Int
-    let temp: Double
-    let hWeather: [HWeather]
-}
-//verificar se posso copiar a struct weather para nao repetir. (verificar se devo usar Class ao inves de struct)
-// let HWeather: Weather
-
-struct HWeather: Codable {
-    let id: Int
-    let main: String
-    let description: String
+    var dt: Int
+    var temp: Double
+    var weather: [Weather]
 }
 
 struct Daily: Codable {
-    let dt: Int
-    let temp: [DailyTemp]
-    let weather: [DailyWeather]
+    var dt: Int
+    var temp: Temp
+    var weather: [Weather]
 }
 
-struct DailyTemp: Codable {
-    let day: Double
+struct Temp: Codable {
+    var day: Double
 }
 
-struct DailyWeather: Codable {
-    let id: Int
-    let main: String
-    let description: String
-}
+
+//verificar se posso copiar a struct weather para nao repetir. (verificar se devo usar Class ao inves de struct)
+// let HWeather: Weather
+
+//struct HWeather: Codable {
+//    let id: Int
+//    let main: String
+//    let description: String
+//}
+
+
+//struct DailyWeather: Codable {
+//    let id: Int
+//    let main: String
+//    let description: String
+//}

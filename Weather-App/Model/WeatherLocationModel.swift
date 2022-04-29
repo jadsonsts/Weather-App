@@ -11,5 +11,4 @@ struct WeatherLocationModel {
     let cityName: String
     let lat: Double
     let lon: Double
-    
 }

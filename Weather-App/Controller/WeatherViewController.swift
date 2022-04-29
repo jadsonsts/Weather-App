@@ -17,11 +17,15 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var conditionImgView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var forecastCollectionView: UICollectionView!
+    @IBOutlet weak var forecastSegmentControl: UISegmentedControl!
+    
     
     var weatherLocationManager = WeatherLocationManager()
     var weatherManager = WeatherManager()
+    //var weatherForecast: WeatherModel?
+    var weatherForecast: WeatherData?
     var latitudeLongitude: (Double, Double)?
-    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -33,6 +37,8 @@ class WeatherViewController: UIViewController {
         
         weatherLocationManager.delegate = self
         weatherManager.delegate = self
+        forecastCollectionView.delegate = self
+        forecastCollectionView.dataSource = self
         
         searchTextField.delegate = self
         getCurrentDay()
@@ -149,6 +155,44 @@ extension WeatherViewController: CLLocationManagerDelegate {
         alert.addAction(action2)
         present(alert, animated: true, completion: nil)
     }
+}
+
+extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+//    func initForecast(forecast: [WeatherModel]) {
+//        weatherForecast = forecast
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let result = weatherForecast {
+            if forecastSegmentControl.selectedSegmentIndex == 0 {
+                return result.hourly.count
+            } else if forecastSegmentControl.selectedSegmentIndex == 1 {
+                return result.daily.count
+            } else {
+                return 0
+            }
+        }
+            return 0
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? DetailsWeatherCollectionViewCell {
+            if forecastSegmentControl.selectedSegmentIndex == 0 {
+                if let forecast = weatherForecast?.hourly[indexPath.row] {
+                    cell.tempLabel.text = String(forecast.temp)
+                    cell.timeLabel.text = String(forecast.dt)
+                }
+
+            }
+
+            return cell
+        }
+        return DetailsWeatherCollectionViewCell()
+    }
+    
+    
 }
 
 

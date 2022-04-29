@@ -12,7 +12,9 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     
-//    func updateCell(weather: Weather) {
-//        
-//    }
+    func updateCell(weather: WeatherModel) {
+        timeLabel.text = "7am"
+        weatherImage.image = UIImage(systemName: weather.conditionDayName)
+        tempLabel.text = "\(weather.daytemp)°C"
+    }
 }

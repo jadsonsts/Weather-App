@@ -174,24 +174,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-50" translatesAutoresizingMaskIntoConstraints="NO" id="zWX-DZ-vMq">
+                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="zWX-DZ-vMq">
                                 <rect key="frame" x="50" y="359" width="314" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-oD-Uq1">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="75"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="80"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-oD-Uq1">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="75"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="60"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1B-Ke-Zhg">
-                                        <rect key="frame" x="88" y="0.0" width="138" height="75"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="90"/>
+                                        <rect key="frame" x="40" y="0.0" width="110" height="75"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="80"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YP-xh-qkd">
-                                        <rect key="frame" x="176" y="0.0" width="138" height="75"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="100"/>
+                                        <rect key="frame" x="145" y="0.0" width="169" height="75"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="80"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -248,6 +248,8 @@
                         <outlet property="conditionImgView" destination="Mb2-Fm-YvR" id="94v-FQ-bBh"/>
                         <outlet property="conditionLabel" destination="gMt-5c-E9o" id="lDK-Sc-7XI"/>
                         <outlet property="dateLabel" destination="tqT-0S-3D4" id="rhR-xy-mbI"/>
+                        <outlet property="forecastCollectionView" destination="k6x-Og-OqX" id="RQm-go-apf"/>
+                        <outlet property="forecastSegmentControl" destination="cOj-Vf-qoV" id="S8s-93-vtN"/>
                         <outlet property="searchTextField" destination="JjM-Gx-Zj4" id="1HJ-A7-Dzt"/>
                         <outlet property="temperatureLabel" destination="MpJ-oD-Uq1" id="ieh-iM-XkP"/>
                     </connections>

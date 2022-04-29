@@ -36,6 +36,55 @@ struct WeatherModel {
             return "cloud"
         }
     }
-// variables for the collection View
+    // variables for the collection View
+    let hourDate: Int
+    let hourWeatherID: Int
+    let hourTemp: Double
+    
+    
+    var conditionHourName: String {
+        switch hourWeatherID {
+        case 200...232:
+            return "cloud.bolt"
+        case 300...321:
+            return "cloud.drizzle"
+        case 500...531:
+            return "cloud.rain"
+        case 600...622:
+            return "snowflake"
+        case 701...781:
+            return "cloud.fog"
+        case 800:
+            return "sun.max"
+        case 801...804:
+            return "cloud"
+        default:
+            return "cloud"
+        }
+    }
 
+    let dayDate: Int
+    let dayWeatherID: Int
+    let daytemp: Double
+    
+    var conditionDayName: String {
+        switch dayWeatherID {
+        case 200...232:
+            return "cloud.bolt"
+        case 300...321:
+            return "cloud.drizzle"
+        case 500...531:
+            return "cloud.rain"
+        case 600...622:
+            return "snowflake"
+        case 701...781:
+            return "cloud.fog"
+        case 800:
+            return "sun.max"
+        case 801...804:
+            return "cloud"
+        default:
+            return "cloud"
+        }
+    }
 }

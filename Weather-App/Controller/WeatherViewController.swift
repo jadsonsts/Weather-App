@@ -43,9 +43,9 @@ class WeatherViewController: UIViewController {
         getCurrentDay()
 
     }
-    @IBAction func weatherSegmentSelected(_ sender: UISegmentedControl) {
-        
-    }
+//    @IBAction func weatherSegmentSelected(_ sender: UISegmentedControl) {
+//        
+//    }
     
     @IBAction func locationPressed(_ sender: UIButton) {
         locationManager.requestLocation()

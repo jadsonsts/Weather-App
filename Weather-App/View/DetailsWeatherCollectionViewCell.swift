@@ -12,8 +12,7 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     
-
-    
+   
     func formatUnixToHour(hour: Double) -> String {
         let newDate = Date(timeIntervalSince1970: hour)
         let dateFormatter = DateFormatter()
@@ -49,9 +48,7 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
         timeLabel.text = "\(formatUnixToDate(date: dailyDouble))"
         tempLabel.text = "\(daily.temp.day)°C"
         weatherImage.image = UIImage(systemName: changeIDtoImage(id: daily.weather[0].id))
-        
 
-        
     }
     
     func changeIDtoImage (id: Int) -> String {
@@ -76,5 +73,3 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
     }
 }
 
-
-//UIImage(systemName: weather.conditionName)

@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 
 protocol WeatherLocationManagerDelegate {
+    
     func didUpdateLocation (_ WeatherLocationManager: WeatherLocationManager, weatherLocation: WeatherLocationModel)
     
     func didFailLocationWithError(error: Error)
@@ -22,26 +23,30 @@ struct WeatherLocationManager {
     func fetchLocation (cityName: String) {
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlString)
+    
     }
     
     func performRequest(with urlString: String) {
-        if let url = URL(string: urlString) {
-            
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: url) { data, response, error in
-                if error != nil {
-                    delegate?.didFailLocationWithError(error: error!)
-                    return
-                }
-                if let safeData = data {
-                    if let location = parseJSON(safeData){
-                        delegate?.didUpdateLocation(self, weatherLocation: location)
+        DispatchQueue.main.async {
+            if let url = URL(string: urlString) {
+                
+                let session = URLSession(configuration: .default)
+                
+                let task = session.dataTask(with: url) { data, response, error in
+                    if error != nil {
+                        delegate?.didFailLocationWithError(error: error!)
+                        return
+                    }
+                    if let safeData = data {
+                        if let location = parseJSON(safeData){
+                            delegate?.didUpdateLocation(self, weatherLocation: location)
+                        }
                     }
                 }
+                task.resume()
             }
-            task.resume()
         }
+
     }
     
     func parseJSON(_ weatherLocationData: Data) -> WeatherLocationModel? {

@@ -109,36 +109,36 @@
                                 </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-Og-OqX">
-                                <rect key="frame" x="10" y="544" width="394" height="85"/>
+                                <rect key="frame" x="10" y="544" width="394" height="90"/>
                                 <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="feS-c9-eWs"/>
+                                    <constraint firstAttribute="height" constant="90" id="feS-c9-eWs"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gAt-g2-Y80">
-                                    <size key="itemSize" width="128" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PBi-3M-cUl">
+                                    <size key="itemSize" width="45" height="85"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="weatherCell" id="yoe-tt-WRj" customClass="DetailsWeatherCollectionViewCell" customModule="Weather_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="85"/>
+                                        <rect key="frame" x="0.0" y="2.5" width="45" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ann-up-GZZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="70" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="45" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gOY-ik-2b8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="85"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gOY-ik-2b8">
+                                                    <rect key="frame" x="0.0" y="5" width="45" height="75"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdb-Gi-4dX">
-                                                            <rect key="frame" x="18" y="0.0" width="34" height="18"/>
+                                                            <rect key="frame" x="5.5" y="0.0" width="34" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.moon.rain" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rRI-xj-9bK">
-                                                            <rect key="frame" x="10.5" y="17" width="49.5" height="52.5"/>
+                                                            <rect key="frame" x="0.0" y="24" width="45.5" height="28.5"/>
                                                             <color key="tintColor" systemColor="systemIndigoColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="49" id="YKp-x5-pAj"/>
@@ -146,7 +146,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hI3-d3-cfA">
-                                                            <rect key="frame" x="18" y="67" width="34" height="18"/>
+                                                            <rect key="frame" x="5.5" y="50" width="34" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -160,12 +160,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="gOY-ik-2b8" secondAttribute="trailing" id="GKC-fc-SpY"/>
-                                                <constraint firstAttribute="bottom" secondItem="gOY-ik-2b8" secondAttribute="bottom" id="QXt-jK-MVx"/>
-                                                <constraint firstItem="gOY-ik-2b8" firstAttribute="top" secondItem="Ann-up-GZZ" secondAttribute="top" id="gSw-lf-ZtD"/>
+                                                <constraint firstAttribute="bottom" secondItem="gOY-ik-2b8" secondAttribute="bottom" constant="5" id="QXt-jK-MVx"/>
+                                                <constraint firstItem="gOY-ik-2b8" firstAttribute="top" secondItem="Ann-up-GZZ" secondAttribute="top" constant="5" id="gSw-lf-ZtD"/>
                                                 <constraint firstItem="gOY-ik-2b8" firstAttribute="leading" secondItem="Ann-up-GZZ" secondAttribute="leading" id="s1W-54-ZSu"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="70" height="85"/>
+                                        <size key="customSize" width="45" height="85"/>
                                         <connections>
                                             <outlet property="tempLabel" destination="hI3-d3-cfA" id="cPY-sD-4QW"/>
                                             <outlet property="timeLabel" destination="Rdb-Gi-4dX" id="Civ-I5-htq"/>
@@ -201,7 +201,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More weather information on the way..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQJ-FR-bHX">
-                                <rect key="frame" x="20" y="729" width="374" height="25"/>
+                                <rect key="frame" x="20" y="734" width="374" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="wr2-ck-LkP"/>
                                 </constraints>

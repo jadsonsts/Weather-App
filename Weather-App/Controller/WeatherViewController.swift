@@ -75,7 +75,7 @@ class WeatherViewController: UIViewController {
     }
     
     func setLabels(with weather: WeatherData){
-        self.temperatureLabel.text = String(format: "%.1f"+"°C", weather.current.temp)
+        self.temperatureLabel.text = String(format: "%.0f"+"°C", weather.current.temp)
         self.conditionImgView.image = UIImage(systemName: self.changeIDtoImage(id: weather.current.weather[0].id))
         self.conditionLabel.text = "\(weather.current.weather[0].main) | \(weather.current.weather[0].description)"
         

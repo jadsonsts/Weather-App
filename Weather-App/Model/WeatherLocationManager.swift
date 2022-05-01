@@ -8,61 +8,42 @@
 import Foundation
 import CoreLocation
 
-protocol WeatherLocationManagerDelegate {
-    
-    func didUpdateLocation (_ WeatherLocationManager: WeatherLocationManager, weatherLocation: WeatherLocationModel)
-    
-    func didFailLocationWithError(error: Error)
-}
+typealias onAPILocationSuccess = (WeatherLocationData) -> Void
+typealias onAPILocationError = (String) -> Void
 
 struct WeatherLocationManager {
     let weatherURL = "https://api.openweathermap.org/geo/1.0/direct?limit=1&appid=8a3344af98190e19042af6eb6e51b172"
     
-    var delegate: WeatherLocationManagerDelegate?
+    let session = URLSession(configuration: .default)
 
-    func fetchLocation (cityName: String) {
+    func fetchLocation (cityName: String, onSuccess: @escaping onAPILocationSuccess, onError: @escaping onAPILocationError) {
         let urlString = "\(weatherURL)&q=\(cityName)"
-        performRequest(with: urlString)
-    
-    }
-    
-    func performRequest(with urlString: String) {
-        DispatchQueue.main.async {
-            if let url = URL(string: urlString) {
+        
+        if let url = URL(string: urlString) {
+            
+            let task = session.dataTask(with: url) { data, response, error in
                 
-                let session = URLSession(configuration: .default)
-                
-                let task = session.dataTask(with: url) { data, response, error in
-                    if error != nil {
-                        delegate?.didFailLocationWithError(error: error!)
+                DispatchQueue.main.async {
+                    
+                    if let error = error {
+                        onError(error.localizedDescription)
                         return
                     }
-                    if let safeData = data {
-                        if let location = parseJSON(safeData){
-                            delegate?.didUpdateLocation(self, weatherLocation: location)
-                        }
+                    guard let data = data else {
+                        onError("Invalid Location")
+                        return
                     }
-                }
-                task.resume()
-            }
-        }
+                    do {
+                        let locationData = try JSONDecoder().decode([WeatherLocationData].self, from: data)
+                        debugPrint(locationData)
+                        onSuccess(locationData[0])
+                    } catch {
+                        onError(error.localizedDescription)
+                    }
 
-    }
-    
-    func parseJSON(_ weatherLocationData: Data) -> WeatherLocationModel? {
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode(WeatherLocationData.self, from: weatherLocationData)
-            let name = decodedData.name
-            let latitude = decodedData.lat
-            let longitude = decodedData.lon
-                        
-            let weatherLocation = WeatherLocationModel(cityName: name, lat: latitude, lon: longitude)
-            
-            return weatherLocation
-        } catch {
-            delegate?.didFailLocationWithError(error: error)
-            return nil
+                }
+            }
+            task.resume()
         }
     }
 }

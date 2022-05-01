@@ -13,8 +13,7 @@ typealias onAPIError = (String) -> Void
 
 
 class WeatherManager {
-    //static let shared = WeatherManager()
-    
+        
     let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?units=metric"
     let apiKey = "&exclude=minutely,alerts&appid=8a3344af98190e19042af6eb6e51b172"
     

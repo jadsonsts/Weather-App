@@ -35,7 +35,6 @@ class WeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        weatherLocationManager.delegate = self
         forecastCollectionView.delegate = self
         forecastCollectionView.dataSource = self
         forecastCollectionView.layer.cornerRadius = 10
@@ -134,29 +133,20 @@ extension WeatherViewController: UITextFieldDelegate {
         DispatchQueue.main.async {
             if let city = self.searchTextField.text {
                 self.cityLabel.text = city
-                self.weatherLocationManager.fetchLocation(cityName: city)
-            }
-        }
-    }
-}
+                self.weatherLocationManager.fetchLocation(cityName: city) { location in
+                    self.weatherManager.fetchWeather(latitude: location.lat, longitude: location.lon) { locationWeather in
+                        self.location = CLLocation(latitude: location.lat, longitude: location.lon)
+                        self.setLabels(with: locationWeather)
+                    } onError: { errorMessage in
+                        self.errorMessageShow(error: errorMessage)
+                    }
 
-//MARK: - WeatherLocationManagerDelegate
-extension WeatherViewController: WeatherLocationManagerDelegate {
-    func didUpdateLocation(_ WeatherLocationManager: WeatherLocationManager, weatherLocation: WeatherLocationModel) {
-        DispatchQueue.main.async {
-            self.cityLabel.text = weatherLocation.cityName
-            self.latitudeLongitude!.0 = weatherLocation.lat
-            self.latitudeLongitude!.1 = weatherLocation.lon
-            self.weatherManager.fetchWeather(latitude: self.latitudeLongitude!.0, longitude: self.latitudeLongitude!.1) { weather in
-                self.setLabels(with: weather)
-            } onError: { errorMessage in
-                self.errorMessageShow(error: errorMessage)
+                } onError: { errorMessage in
+                    self.errorMessageShow(error: errorMessage)
+                }
+
             }
         }
-    }
-    
-    func didFailLocationWithError(error: Error) {
-        errorMessageShow(error: "\(error)")
     }
 }
 
@@ -213,9 +203,8 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? DetailsWeatherCollectionViewCell {
             if forecastSegmentControl.selectedSegmentIndex == 0 {
-                if let hourForecast = weatherForecast?.hourly[indexPath.row] {
+                if let hourForecast = weatherForecast?.hourly[indexPath.row]  {
                     cell.updateCellHour(hourly: hourForecast)
-                    print(cell.tempLabel.text!)
                 }
             } else if forecastSegmentControl.selectedSegmentIndex == 1 {
                 if let dayForecast = weatherForecast?.daily[indexPath.row] {

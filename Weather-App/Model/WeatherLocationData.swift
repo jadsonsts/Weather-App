@@ -9,6 +9,5 @@ import Foundation
 
 struct WeatherLocationData: Codable {
     let name: String
-    let lat: Double
-    let lon: Double
+    let lat, lon: Double
 }

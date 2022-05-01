@@ -41,6 +41,7 @@ class WeatherViewController: UIViewController {
                
         searchTextField.delegate = self
         getCurrentDay()
+        
     }
      
     @IBAction func forecastSegmentControlChanged(_ sender: UISegmentedControl) {
@@ -49,6 +50,7 @@ class WeatherViewController: UIViewController {
     
     @IBAction func locationPressed(_ sender: UIButton) {
         locationManager.requestLocation()
+        searchTextField.text = ""
     }
     
     func getCurrentDay(){
@@ -73,7 +75,7 @@ class WeatherViewController: UIViewController {
     }
     
     func setLabels(with weather: WeatherData){
-        self.temperatureLabel.text = String(format: "%.1f", weather.current.temp)
+        self.temperatureLabel.text = String(format: "%.1f"+"°C", weather.current.temp)
         self.conditionImgView.image = UIImage(systemName: self.changeIDtoImage(id: weather.current.weather[0].id))
         self.conditionLabel.text = "\(weather.current.weather[0].main) | \(weather.current.weather[0].description)"
         

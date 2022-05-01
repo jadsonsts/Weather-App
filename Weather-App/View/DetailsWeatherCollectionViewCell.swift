@@ -39,12 +39,14 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
     func updateCellHour (hourly: Hourly) {
         let hourDouble = Double(hourly.dt)
         timeLabel.text = "\(formatUnixToHour(hour: hourDouble))"
+        timeLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         weatherImage.image = UIImage(systemName: changeIDtoImage(id: hourly.weather[0].id))
         tempLabel.text = String(format: "%.0f"+"°C", hourly.temp)
     }
     func updateCellDay (daily: Daily) {
         let dailyDouble = Double(daily.dt)
         timeLabel.text = "\(formatUnixToDate(date: dailyDouble))"
+        timeLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         tempLabel.text = String(format: "%.0f"+"°C", daily.temp.day)
         weatherImage.image = UIImage(systemName: changeIDtoImage(id: daily.weather[0].id))
     }

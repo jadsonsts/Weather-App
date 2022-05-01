@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DF27BBFA2815147D0007370C /* Weather-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF04BCA3281E9FB100996827 /* Weather-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Weather-App.app"; path = "/Users/jadsoncarneiro/Desktop/iOS-Dev/DevsLopes/Dev/Week8/Weather-App/build/Debug-iphoneos/Weather-App.app"; sourceTree = "<absolute>"; };
 		DF27BBFD2815147D0007370C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF27BBFF2815147D0007370C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DF27BC012815147D0007370C /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -36,31 +36,12 @@
 		DF27BC1E281695410007370C /* WeatherLocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLocationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFrameworksBuildPhase section */
-		DF27BBF72815147D0007370C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
 		DF27BBF12815147D0007370C = {
 			isa = PBXGroup;
 			children = (
 				DF27BBFC2815147D0007370C /* Weather-App */,
-				DF27BBFB2815147D0007370C /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		DF27BBFB2815147D0007370C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DF27BBFA2815147D0007370C /* Weather-App.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		DF27BBFC2815147D0007370C /* Weather-App */ = {
@@ -114,7 +95,6 @@
 			buildConfigurationList = DF27BC0E2815147F0007370C /* Build configuration list for PBXNativeTarget "Weather-App" */;
 			buildPhases = (
 				DF27BBF62815147D0007370C /* Sources */,
-				DF27BBF72815147D0007370C /* Frameworks */,
 				DF27BBF82815147D0007370C /* Resources */,
 			);
 			buildRules = (
@@ -123,7 +103,7 @@
 			);
 			name = "Weather-App";
 			productName = "Weather-App";
-			productReference = DF27BBFA2815147D0007370C /* Weather-App.app */;
+			productReference = DF04BCA3281E9FB100996827 /* Weather-App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -150,7 +130,7 @@
 				Base,
 			);
 			mainGroup = DF27BBF12815147D0007370C;
-			productRefGroup = DF27BBFB2815147D0007370C /* Products */;
+			productRefGroup = DF27BBF12815147D0007370C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

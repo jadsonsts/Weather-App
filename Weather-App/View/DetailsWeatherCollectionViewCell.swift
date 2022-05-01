@@ -18,7 +18,7 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .medium //Set time style
         dateFormatter.dateStyle = .none
-        dateFormatter.dateFormat = "hh"
+        dateFormatter.dateFormat = "ha"
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: newDate)
 
@@ -29,7 +29,7 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeStyle = .none //Set time style
                 dateFormatter.dateStyle = .short
-                dateFormatter.dateFormat = "dd"
+                dateFormatter.dateFormat = "dd/MM"
                 dateFormatter.timeZone = .current
                 let localDate = dateFormatter.string(from: newDate)
 
@@ -38,19 +38,17 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
     
     func updateCellHour (hourly: Hourly) {
         let hourDouble = Double(hourly.dt)
-        timeLabel.text = "\(formatUnixToDate(date: hourDouble))"
+        timeLabel.text = "\(formatUnixToHour(hour: hourDouble))"
         weatherImage.image = UIImage(systemName: changeIDtoImage(id: hourly.weather[0].id))
-        tempLabel.text = "\(hourly.temp)°C"
+        tempLabel.text = String(format: "%.0f"+"°C", hourly.temp)
     }
-    
     func updateCellDay (daily: Daily) {
         let dailyDouble = Double(daily.dt)
         timeLabel.text = "\(formatUnixToDate(date: dailyDouble))"
-        tempLabel.text = "\(daily.temp.day)°C"
+        tempLabel.text = String(format: "%.0f"+"°C", daily.temp.day)
         weatherImage.image = UIImage(systemName: changeIDtoImage(id: daily.weather[0].id))
-
     }
-    
+
     func changeIDtoImage (id: Int) -> String {
         switch id {
         case 200...232:

@@ -39,12 +39,12 @@ class WeatherViewController: UIViewController {
         forecastCollectionView.delegate = self
         forecastCollectionView.dataSource = self
         forecastCollectionView.layer.cornerRadius = 10
-        
+               
         searchTextField.delegate = self
         getCurrentDay()
     }
-    
-    @IBAction func weatherSegmentSelected(_ sender: UISegmentedControl) {
+     
+    @IBAction func forecastSegmentControlChanged(_ sender: UISegmentedControl) {
         forecastCollectionView.reloadData()
     }
     
@@ -81,6 +81,9 @@ class WeatherViewController: UIViewController {
         weatherManager.resolveNameLocation(with: location) { [weak self] locationName in
             self?.cityLabel.text = locationName
         }
+        //setting the object to use in the collection view forecast and reload it's data to show it
+        weatherForecast = weather
+        forecastCollectionView.reloadData()
     }
     
     func changeIDtoImage (id: Int) -> String {
@@ -133,13 +136,6 @@ extension WeatherViewController: UITextFieldDelegate {
                 self.cityLabel.text = city
                 self.weatherLocationManager.fetchLocation(cityName: city)
             }
-//            if let lat = self.latitudeLongitude?.0, let lon = self.latitudeLongitude?.1 {
-//                self.weatherManager.fetchWeather(latitude: lat, longitude: lon) { weather in
-//                    self.weatherForecast = weather
-//                } onError: { errorMessage in
-//                    self.errorMessageShow(error: errorMessage)
-//                }
-//            }
         }
     }
 }
@@ -210,7 +206,7 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return 0
             }
         }
-        return 8
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -219,6 +215,7 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
             if forecastSegmentControl.selectedSegmentIndex == 0 {
                 if let hourForecast = weatherForecast?.hourly[indexPath.row] {
                     cell.updateCellHour(hourly: hourForecast)
+                    print(cell.tempLabel.text!)
                 }
             } else if forecastSegmentControl.selectedSegmentIndex == 1 {
                 if let dayForecast = weatherForecast?.daily[indexPath.row] {
